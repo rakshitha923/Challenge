@@ -1,0 +1,37 @@
+<aura:component >
+    <aura:attribute name="account" type="Account[]"/>
+        <aura:iteration  items="{!v.account}" var="acc">
+             <lightning:card title="Details of the record" variant="Narrow" iconName="standard:account">
+                 <div class="c-container"> 
+                 <lightning:layout multipleRows="true">
+                     <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="3" padding="around-small">
+                         <h2 class="text">Name:</h2>{!acc.Name}+
+                     </lightning:layoutItem >
+                     <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="3" padding="around-small">
+            			<h2 class="text">Account Owner:</h2>{!acc.Owner.Name}
+                     </lightning:layoutItem>
+                     <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="3" padding="around-small">
+                        <p><h2 class="text">Industry:</h2>{!acc.Industry}</p>
+                     </lightning:layoutItem>
+                      <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="3" padding="around-small">
+            			<h2 class="text">Account Number:</h2>{!acc.AccountNumber}
+                     </lightning:layoutItem>
+                      
+                       <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="3" padding="around-small">
+            			<h2 class="text">Number Of Employees:</h2>{!acc.NumberOfEmployees}
+                     </lightning:layoutItem>
+                     <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="3" padding="around-small">
+            			<h2 class="text">Type:</h2>{!acc.Type}
+                     </lightning:layoutItem>
+                <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="3" padding="around-small">
+            			<h2 class="text">Billing Street:</h2>{!acc.BillingStreet}
+                     </lightning:layoutItem>
+                     <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="3" padding="around-small">
+            			<h2 class="text">CreatedBy:</h2>{!acc.CreatedBy.Name}
+                     </lightning:layoutItem>
+               </lightning:layout>
+                     </div>
+                  </lightning:card>
+        </aura:iteration>
+   
+</aura:component>
