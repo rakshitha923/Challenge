@@ -4,12 +4,15 @@
     <aura:attribute name="accountList" type="Account"/>
     <aura:attribute name="accounts" type="Account[]"/>
      <aura:attribute name="Columns" type="List"/>
+    <aura:attribute name="ColumnsUpdate" type="List"/>
     <aura:attribute name="selectedRecord" type="Account"/>
      <aura:attribute name="Recordcount" type="Integer"/>
     <aura:attribute name="RecordIds" type="Id[]"/>
-     <lightning:card title="List Of Accounts " iconName="standard:account">
+    <aura:attribute name="SourceValue" type="List" default="Web,Phone Inquiry,Partner Referral,Purchased List,Other,Referral,Social Media,All"/>
+    <aura:attribute name="SelectedSource" type="String"/> 
+    <lightning:card title="List Of Accounts " iconName="standard:account">
          <aura:set attribute="actions">
-             <lightning:button label="Edit"  variant="brand" onclick="{!c.editRecord}"/>
+             <lightning:button label="Update Account Source"  variant="brand" onclick="{!c.openModal}"/>
              <lightning:button label="Delete" variant="brand" onclick="{!c.deleteRecord}"/>
              </aura:set>
     <lightning:datatable
@@ -18,12 +21,53 @@
                          columns="{!v.Columns}"
                          onrowselection="{!c.getSelectedRecord}" 
                          aura:id="selected" 
-                          onrowaction="{!c.editRecords}"
+                          onrowaction="{! c.handleRowAction }"
                          class="slds-cell-buffer_left 
                                 slds-cell-buffer_right 
                                 slds-table_bordered 
                                 slds-table_striped"/>
 
    </lightning:card>
+
     <c:TechChallengeDisplayDetail account="{!v.selectedRecord}"/>
+    <div aura:id="modal"  class="slds-hide">
+    <div class="slds-modal 
+                slds-backdrop slds-backdrop_open"
+                >
+        <div class="slds-modal__container">
+            <div class="slds-modal__header">
+                <lightning:buttonIcon iconName="utility:close"
+                                      alternativeText="close the window" 
+                                      class="slds-modal__close"
+                                      variant="bare-inverse"
+                                      size="large"
+                                      onclick="{! c.closeModal}"
+                                      />
+               
+            </div>
+<div class="slds-modal__content">
+    <lightning:datatable
+                         keyField="id"
+                         data="{!v.selectedRecord}"
+                         columns="{!v.ColumnsUpdate}" 
+                         hideCheckboxColumn="true"
+                         />
+     <lightning:select name="select" label="Account Source" aura:id="source" onchange="{! c.onchnagepick}">
+         <option value="">Please select</option>
+        <aura:iteration items="{!v.SourceValue}" var="srcvalue">
+                <option text="{!srcvalue}"></option>
+            </aura:iteration>
+    </lightning:select>
+
+     </div>
+             <div class="slds-modal__footer">
+                <lightning:button label="Update" 
+                                  variant="brand" 
+                                  onclick="{! c.UpdateRecord}" />
+                <lightning:button label="Cancel" 
+                                  onclick="{! c.closeModal}"/>
+            </div>
+        </div>
+    </div>
+        </div>
 </aura:component>
