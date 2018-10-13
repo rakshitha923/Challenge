@@ -20,6 +20,16 @@ TechChallengeDisplayRecord.deleteRecords(accountid);
 
 }
 
+@isTest
+private static void updateSourceRecords(){
+List<Account> accountid=new list<Account>();
+Account a=new Account();
+a.Name='test';
+insert a;
+accountid.add(a);
+TechChallengeDisplayRecord.updaterecord(accountid,'web');
+}
+
 
 
 }
